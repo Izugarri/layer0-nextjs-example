@@ -3,4 +3,12 @@
 
 const { withLayer0, withServiceWorker } = require('@layer0/next/config')
 
-module.exports = withLayer0(withServiceWorker())
+
+
+module.exports = {
+	eslint: {
+    // Warning: Dangerously allow production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
+}
