@@ -5,6 +5,8 @@ const { join } = require('path')
 
 module.exports = {
   connector: '@layer0/next',
+  includeFiles: {
+    [join('.next', 'BUILD_ID')]: true,
   },
   backends: {
     api: {
