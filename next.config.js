@@ -1,21 +1,9 @@
-module.exports = {
-  reactStrictMode: true,
-}
 const { withLayer0, withServiceWorker } = require('@layer0/next/config')
 
-  module.exports = withLayer0(
-    withServiceWorker({
-      layer0SourceMaps: true,
-      // ...
-      // additional Next.js config options here
-      // ...
-      async rewrites() {
-    return [
-      {
-        source: '/index.html',
-        destination: '/',
-      },
-    ]
-  },
-    })
-  )
+module.exports = withLayer0(
+  withServiceWorker({
+    // Output source maps so that stack traces have original source filenames and line numbers when tailing
+    // the logs in the Layer0 developer console.
+    layer0SourceMaps: true,
+  })
+)
