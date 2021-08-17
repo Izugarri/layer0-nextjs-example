@@ -5,5 +5,16 @@ module.exports = withLayer0(
     // Output source maps so that stack traces have original source filenames and line numbers when tailing
     // the logs in the Layer0 developer console.
     layer0SourceMaps: true,
+// ...
+      // additional Next.js config options here
+      // ...
+      async rewrites() {
+    return [
+      {
+        source: '/index.html',
+        destination: '/',
+      },
+    ]
+  },
   })
 )
