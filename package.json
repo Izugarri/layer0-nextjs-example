@@ -11,7 +11,7 @@
     "eject": "react-scripts eject",
     "prettier:format": "prettier '**/*' --ignore-unknown --write"
   },
-  "name": "layer-stevie",
+  "name": "layer-simply",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
