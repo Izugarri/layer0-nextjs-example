@@ -1,10 +1,10 @@
 {
   "applications": {
     "_default": {
-      "link": "simplyred"
+      "link": "simply"
     },
-    "simplyred": {
-      "applicationId": "hivlVbBTV76E8rYBXjL0oYNx58vAccLYNI3CgnKP"
+    "simply": {
+      "applicationId": "11ov2cSFTg0Co0WD2Tsqp76MkytO1SnCDmsGhfHE"
     }
   }
 }
