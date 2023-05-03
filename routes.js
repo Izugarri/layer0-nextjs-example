@@ -1,29 +1,33 @@
-// This file was automatically added by edgio deploy.
-// You should commit this file to source control.
-import { Router } from '@edgio/core'
-import { reactCRARoutes } from '@edgio/react-cra'
-import { isProductionBuild } from '@edgio/core/environment'
-import { API_CACHE_HANDLER, EDGE_CACHE_HANDLER, IMAGE_CACHE_HANDLER } from './cache'
+// routes.js
 
-const router = new Router()
+const { Router } = require('@edgio/core/router')
 
-// Prevent search engines from indexing permalink URLs
-router.noIndexPermalink()
+const ONE_YEAR = 365 * 24 * 60 * 60
 
-// API (Any backend) caching
-router.match('/Control/:path*')
-
-// Image caching
-router.match('/l0-opt', IMAGE_CACHE_HANDLER)
-
-if (isProductionBuild()) {
-  router.match('/', EDGE_CACHE_HANDLER)
-  router.match('/Control/:path*', API_CACHE_HANDLER)
-  router.match('/commerce', EDGE_CACHE_HANDLER)
-  router.match('/product/:name', EDGE_CACHE_HANDLER)
-  router.match('/commerce/:name', EDGE_CACHE_HANDLER)
+const edgeOnly = {
+  browser: false,
+  edge: { maxAgeSeconds: ONE_YEAR },
 }
 
-router.use(reactCRARoutes)
+const edgeAndBrowser = {
+  browser: false,
+  edge: false,
+}
 
-export default router
+const handler = ({ cache, serveStatic }, cacheConfig, path) => {
+  cache(cacheConfig)
+  serveStatic(path)
+}
+
+module.exports = new Router()
+
+  
+  // Path(s) that do not have a "." as well as "/" to serve the fallback page
+  .get('/:path*/:file([^\\.]+|)', ({ appShell, cache }) => {
+    cache(edgeOnly)
+    appShell('public/index.html')
+  }) 
+  
+  // All other paths to be served from the src directory
+  .get('/Control/:path*', res => handler(res, edgeAndBrowser, 'public/Control/:path*'))
+  .get('/:path*', res => handler(res, edgeOnly, 'public/:path*'))
