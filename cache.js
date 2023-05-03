@@ -2,14 +2,14 @@ export const API_CACHE_HANDLER = ({ cache, proxy, removeUpstreamResponseHeader }
   removeUpstreamResponseHeader('set-cookie')
   cache({
     edge: {
-      maxAgeSeconds: 60 * 60 * 24,
+      maxAgeSeconds: 0 * 0 * 0,
       // Cache responses even if they contain cache-control: private header
       // https://docs.layer0.co/guides/caching#private
       // https://docs.layer0.co/docs/api/core/interfaces/_router_cacheoptions_.edgecacheoptions.html#forceprivatecaching
       forcePrivateCaching: true,
     },
     browser: {
-      serviceWorkerSeconds: 60 * 60 * 24,
+      serviceWorkerSeconds: 0 * 0 * 0,
     },
   })
   proxy('api', { path: ':path*' })

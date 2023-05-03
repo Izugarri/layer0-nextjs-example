@@ -18,7 +18,7 @@ router.match('/l0-opt', IMAGE_CACHE_HANDLER)
 
 if (isProductionBuild()) {
   router.match('/', EDGE_CACHE_HANDLER)
-  router.match('/Control/:path*', API_CACHE_HANDLER)
+  router.match('/about', EDGE_CACHE_HANDLER)
   router.match('/commerce', EDGE_CACHE_HANDLER)
   router.match('/product/:name', EDGE_CACHE_HANDLER)
   router.match('/commerce/:name', EDGE_CACHE_HANDLER)
